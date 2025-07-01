@@ -1,0 +1,51 @@
+//This is My Approach
+class Solution {
+public:
+    int longestOnes(vector<int>& nums, int k) {
+       int l = 0;
+       int r = 0;
+       int maxLength = 0;
+
+        while(r < nums.size()){
+
+            if(k == 0 && nums[r] == 0){
+              while(nums[l] == 1){
+                  l++;
+              }
+
+              k++;
+              l++;
+            }
+
+           if(nums[r] == 0 && k != 0){
+              k--;
+           }
+
+           maxLength = max(maxLength , r - l + 1);
+           r++;
+        }
+
+        return maxLength;
+    }
+};
+
+//Strivers Approach
+class Solution {
+public:
+    int longestOnes(vector<int>& nums, int k) {
+        int l = 0, maxLength = 0, zeros = 0;
+
+        for (int r = 0; r < nums.size(); r++) {
+            if (nums[r] == 0) zeros++;
+
+            while (zeros > k) {
+                if (nums[l] == 0) zeros--;
+                l++;
+            }
+
+            maxLength = max(maxLength, r - l + 1);
+        }
+
+        return maxLength;
+    }
+};
